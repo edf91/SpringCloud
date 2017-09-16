@@ -1,0 +1,49 @@
+spring:
+  application:
+    name: eureka-server
+  profiles:
+    active: eserver1
+info:
+  app:
+    name: @project.artifactId@
+    encoding: @project.build.sourceEncoding@
+    java:
+      source: @java.version@
+      target: @java.version@
+#服务认证
+#security:
+#  basic:
+#    enabled: true
+#  user:
+#    name: root
+#    password: root
+#自我保护模式 应对网络异常导致的删除服务
+eureka:
+  server:
+    enable-self-preservation: false
+---
+spring:
+  profiles: eserver1
+server:
+  port: 30000
+eureka:
+  instance:
+    hostname: eserver1
+  client:
+    serviceUrl:
+      defaultZone: http://eserver2:30001/eureka/
+    fetch-registry: false
+    register-with-eureka: false
+---
+spring:
+  profiles: eserver2
+server:
+  port: 30001
+eureka:
+  instance:
+    hostname: eserver2
+  client:
+    serviceUrl:
+      defaultZone: http://eserver1:30000/eureka/
+    fetch-registry: false
+    register-with-eureka: false
