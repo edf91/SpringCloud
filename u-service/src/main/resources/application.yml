@@ -1,6 +1,6 @@
 spring:
   application:
-    name: u-service
+    name: service
   profiles:
     active: uservice1
 eureka:

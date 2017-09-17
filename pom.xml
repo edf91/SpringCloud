@@ -24,6 +24,8 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>1.8</java.version>
+        <docker.registry>localhost:50000/wangxd/</docker.registry>
+        <docker.maven.version>0.4.13</docker.maven.version>
     </properties>
 
     <dependencyManagement>
@@ -43,6 +45,13 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+
+            <!--docker -->
+            <plugin>
+                <groupId>com.spotify</groupId>
+                <artifactId>docker-maven-plugin</artifactId>
+                <version>${docker.maven.version}</version>
             </plugin>
         </plugins>
     </build>

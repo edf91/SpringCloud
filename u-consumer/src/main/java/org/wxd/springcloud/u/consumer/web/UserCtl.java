@@ -27,16 +27,16 @@ public class UserCtl {
     @GetMapping(value = "/c/user/{id}")
     public User ofId(@PathVariable("id") String id){
 
-        return restTemplate.getForObject("http://u-service/user/" + id,User.class);
+        return restTemplate.getForObject("http://service/user/" + id,User.class);
     }
 
     /**
      * 查询服务信息
      * @return
      */
-    @GetMapping("/u-instance")
+    @GetMapping("/instance")
     public List<ServiceInstance> showInfo(){
-        return this.discoveryClient.getInstances("u-service");
+        return this.discoveryClient.getInstances("service");
     }
 
 }

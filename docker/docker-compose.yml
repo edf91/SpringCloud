@@ -1,0 +1,33 @@
+version: '2'
+services:
+  eserver1:
+    image: localhost:50000/wangxd/eureka-server:1.0-SNAPSHOT
+    hostname: eserver1
+    ports:
+      - "30000:30000"
+    environment:
+      - spring.profiles.active=eserver1
+  eserver2:
+    image: localhost:50000/wangxd/eureka-server:1.0-SNAPSHOT
+    hostname: eserver2
+    environment:
+      - spring.profiles.active=eserver2
+    ports:
+      - "30001:30001"
+  service:
+    image: localhost:50000/wangxd/u-service:1.0-SNAPSHOT
+    hostname: service
+    ports:
+      - "30002:30002"
+      - "30003:30003"
+    depends_on:
+      - eserver1
+      - eserver2
+  consumer:
+    image: localhost:50000/wangxd/u-consumer:1.0-SNAPSHOT
+    hostname: consumer
+    ports:
+      - "30004:30004"
+      - "30005:30005"
+    depends_on:
+      - service

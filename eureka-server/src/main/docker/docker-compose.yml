@@ -1,0 +1,6 @@
+version: '2'
+services:
+  eureka-server:
+    image: localhost:50000/wangxd/eureka-server:1.0-SNAPSHOT
+    ports:
+      - "30000:30000"

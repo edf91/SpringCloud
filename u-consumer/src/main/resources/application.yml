@@ -1,3 +1,8 @@
+spring:
+  application:
+    name: consumer
+  profiles:
+    active: uconsumer1
 eureka:
   client:
     serviceUrl:
@@ -15,20 +20,13 @@ logging:
   level:
     root: INFO
     org.springframework.web.servlet.DispatcherServlet: DEBUG
-spring:
-  profiles:
-    active: uconsumer1
 ---
 spring:
   profiles: uconsumer1
-  application:
-    name: uconsumer1
 server:
   port: 30004
 ---
 spring:
   profiles: uconsumer2
-  application:
-    name: uconsumer2
 server:
   port: 30005

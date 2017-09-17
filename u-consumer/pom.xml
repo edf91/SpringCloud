@@ -25,4 +25,52 @@
             <artifactId>spring-cloud-starter-sleuth</artifactId>
         </dependency>
     </dependencies>
+
+    <build>
+        <plugins>
+            <!--docker -->
+            <plugin>
+                <groupId>com.spotify</groupId>
+                <artifactId>docker-maven-plugin</artifactId>
+                <!--绑定执行 周期-->
+                <executions>
+                    <execution>
+                        <id>build-image</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>build</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>push-image</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>push</goal>
+                        </goals>
+                    </execution>
+                </executions>
+
+                <!--基于 Dockerfile-->
+                <configuration>
+                    <imageName>${docker.registry}${project.artifactId}</imageName>
+                    <imageTags>
+                        <imageTag>${project.version}</imageTag>
+                    </imageTags>
+                    <dockerDirectory>${project.basedir}/src/main/docker</dockerDirectory>
+                    <resources>
+                        <resource>
+                            <targetPath>/</targetPath>
+                            <directory>${project.build.directory}</directory>
+                            <include>${project.build.finalName}.jar</include>
+                        </resource>
+                    </resources>
+
+                    <!--推送 docker hub id为 settings 一致-->
+                    <serverId>docker-local-hub</serverId>
+                    <!--强制覆盖tag-->
+                    <forceTags>true</forceTags>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>
