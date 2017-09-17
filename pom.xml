@@ -15,6 +15,7 @@
         <module>zipkin</module>
         <module>hystrix-turbine</module>
         <module>hystrix-dashboard</module>
+        <module>zuul</module>
     </modules>
 
 
