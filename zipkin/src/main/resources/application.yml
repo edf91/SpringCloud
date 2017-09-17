@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: zipkin
+  profiles:
+    active: zipkin1
+logging:
+  level:
+    root: INFO
+    org.springframework.web.servlet.DispatcherServlet: DEBUG
+---
+spring:
+  profiles: zipkin1
+server:
+  port: 30006
+---
+spring:
+  profiles: zipkin2
+server:
+  port: 30007

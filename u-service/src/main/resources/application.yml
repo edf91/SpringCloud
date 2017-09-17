@@ -3,6 +3,11 @@ spring:
     name: service
   profiles:
     active: uservice1
+  zipkin:
+    base-url: http://zipkin:30006
+  sleuth:
+    sampler:
+      percentage: 1.0
 eureka:
   client:
     serviceUrl:

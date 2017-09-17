@@ -1,37 +1,28 @@
 spring:
   application:
-    name: consumer
+    name: turbine
   profiles:
-    active: uconsumer1
-  zipkin:
-    base-url: http://zipkin:30006
-  sleuth:
-    sampler:
-      percentage: 1.0
+    active: turbine1
 eureka:
   client:
     serviceUrl:
       defaultZone: http://eserver1:30000/eureka/,http://eserver2:30001/eureka/
   instance:
     prefer-ip-address: true #为true表示将自己的IP地址注册到Eureka Server，false表示将hostname注册到Eureka Server
-info:
-  app:
-    name: @project.artifactId@
-    encoding: @project.build.sourceEncoding@
-    java:
-      source: @java.version@
-      target: @java.version@
 logging:
   level:
     root: INFO
     org.springframework.web.servlet.DispatcherServlet: DEBUG
+turbine:
+  app-config: service,consumer
+  cluster-name-expression: "'default'"
 ---
 spring:
-  profiles: uconsumer1
+  profiles: turbine1
 server:
-  port: 30004
+  port: 30010
 ---
 spring:
-  profiles: uconsumer2
+  profiles: turbin2
 server:
-  port: 30005
+  port: 30011

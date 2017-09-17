@@ -12,6 +12,9 @@
         <module>eureka-server</module>
         <module>u-service</module>
         <module>u-consumer</module>
+        <module>zipkin</module>
+        <module>hystrix-turbine</module>
+        <module>hystrix-dashboard</module>
     </modules>
 
 
