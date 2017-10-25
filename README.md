@@ -36,6 +36,7 @@
 - 配合security增加用户认证
 - 提供REST端点，集成其他非JAVA微服务
 - 提供多网卡环境配置
+- eureka说明地址： [https://github.com/wangxiaodong91/SpringCloud/blob/master/eureka-server/README.md](https://github.com/wangxiaodong91/SpringCloud/blob/master/eureka-server/README.md)
     
 ## ribbon
 - 负载均衡 配合 eureka 实现通过虚拟机主名称调用服务
@@ -49,7 +50,7 @@
 - 通过/health基于查看断路器是否打开，默认是5秒内20次失败，则会打开
 - dashboard监控单个，turbine聚合多个
 - turbine可以配置mq进行收集信息，客户端需要引入mq，修改注解为@EnableTurbineStream，并移除配置，采用mq配置即可
-
+- 属性说明地址： [https://github.com/wangxiaodong91/SpringCloud/blob/master/hystrix-dashboard/README.md](https://github.com/wangxiaodong91/SpringCloud/blob/master/hystrix-dashboard/README.md)
 
 ## sleuth
 - 链路监控
@@ -110,7 +111,6 @@
  - 统一配置管理
  - 基于端点发送refresh手动刷新
  - 基于Bus[依赖mq]实现自动刷新，轻量级消息代理
-
 
 ## 源码地址
 [https://github.com/wangxiaodong91/SpringCloud](https://github.com/wangxiaodong91/SpringCloud)
