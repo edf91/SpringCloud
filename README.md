@@ -1,3 +1,4 @@
+[toc]
 # SpringCloud
 ## 环境信息
 - eureka-server 
@@ -7,13 +8,17 @@
 - u-consumer
     - 2台  30004 30005
 - zipkin
-    - 2台 30006 30007
+    - 1台 30006 
 - hystrix-dashboard
-    - 2台 30008 30009
+    - 1台 30008
 - turbine
-    - 2台 30010 30011
+    - 1台 30010
 - zuul
     - 2台 30012 30013
+- sidecar
+    - 2台 30014 30015
+- dubbo
+    - 2台 30016 30017
 
 - 注意：hystrix、ribbon、zuul等即代理，遇到文件上传，需要主要timeout设置
 
@@ -37,12 +42,14 @@
 - 虚拟主机名称不能有"_"，否则调用时会报错
 - 自定义ribbon属性 clientName.ribbon.[ILoadBalancer|IRule|IPing|ServerList|ServerListFilter]实现类
 - 支持其他非eureka支持的 实现负载均衡，只需配置clientName.ribbon.listOfServers:[host:port,host2:port2]
-    
+
+
 ## hystrix
-- 熔断，基于archaius实现动态配置 
+- 熔断，基于archaius实现动态配置
 - 通过/health基于查看断路器是否打开，默认是5秒内20次失败，则会打开
 - dashboard监控单个，turbine聚合多个
 - turbine可以配置mq进行收集信息，客户端需要引入mq，修改注解为@EnableTurbineStream，并移除配置，采用mq配置即可
+
 
 ## sleuth
 - 链路监控
@@ -81,15 +88,24 @@
  - 如果代理文件上传，需要注意上传大小、超时时间等
  - 可以自定义实现熔断、回退。
  - 可以实现请求的聚合，但一般不会这么做，耦合服务
- - /routes端点可以管理zuul路由 POST会强制刷新路由，GET返回列表
+ - 默认使用Apache的HTTPClient发起http请求，可以使用RestClient或者OkHttpClient，通过配置ribbon.[restclient|okhttp].enabled=true进行切换
+ - /routes 端点可以管理zuul路由 POST会强制刷新路由，GET返回列表 [注：需要设置 management.security.enabled=false]
  - 路由配置支持，指定服务，正则，忽略指定服务，增加前缀等；也可以自定义实现；header可控
  - 过滤器：PRE（请求前）、ROUTING（将请求路由到服务，用于构建发给服务的请求，可以使用httpClient或ribbon）、POST（可以添加响应header等）、ERROR（发生错误时执行）和自定义过滤器
  - 禁用过滤器：zuul.[过滤器类名].[过滤器类型].disabled=true即可，zuul默认有：DebugFilter、FormBodyWarpperFilter、PreDecorationFilter等过滤器位于filters包下
 
 ## sidecar
  - 整合了zuul 
- - 用于整合非eureka的微服务，如dubbo
-
+ - 用于整合非eureka的微服务，即通过sidecar进行转发，多了一层sidecar的转发，如dubbo
+ - sidecar 会获取非eureka微服务的健康状态，并传播到eureka
+ - 消费方要使用dubbo服务，通过Ribbon或者Feign进行sidecarServiceId/dubboApi调用
+ - /hosts/serviceId 获取sidecar代理的实例 实际上整合也就是通过该接口获取到被整合的服务的地址和端口，再进行转发
+ - /routes 可以看到被代理的springCloud服务
+ - 非springCloud需要实现/health接口，并返回 {status:"UP"}的json文档，让sidecar判断服务是否可用。
+ 
+  
+  
+  
 ## config
  - 统一配置管理
  - 基于端点发送refresh手动刷新

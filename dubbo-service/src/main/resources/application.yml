@@ -1,0 +1,31 @@
+spring:
+  dubbo:
+    application:
+      name: dubbo-provider
+    registry: 
+      address: zookeeper://127.0.0.1:2181
+    protocol: 
+      name: dubbo
+      port: 20880
+    scan: org.wxd.springcloud.dubbo
+  application:
+    name: dubbo-provider
+  profiles:
+    active: dubbo-provider1
+info:
+  app:
+    name: @project.artifactId@
+    encoding: @project.build.sourceEncoding@
+    java:
+      source: @java.version@
+      target: @java.version@
+---
+spring:
+  profiles: dubbo-provider1
+server:
+  port: 30016
+---
+spring:
+  profiles: dubbo-provider2
+server:
+  port: 30017

@@ -24,7 +24,35 @@
         </dependency>
     </dependencies>
 
+    <!--<profiles>-->
+        <!--<profile>-->
+            <!--<id>dev</id>-->
+            <!--<properties>-->
+                <!--<profiles.active>dev</profiles.active>-->
+                <!--<build.exclude></build.exclude>-->
+                <!--<project.build.finalName>${project.build.finalName}</project.build.finalName>-->
+            <!--</properties>-->
+            <!--<activation>-->
+                <!--<activeByDefault>true</activeByDefault>-->
+            <!--</activation>-->
+        <!--</profile>-->
+    <!--</profiles>-->
+
     <build>
+        <!--<filters>-->
+            <!--<filter>src/main/resources/application-${profiles.active}.yml</filter>-->
+        <!--</filters>-->
+        <!--<resources>-->
+            <!--<resource>-->
+                <!--<directory>src/main/resources</directory>-->
+                <!--&lt;!&ndash;<excludes>&ndash;&gt;-->
+                    <!--&lt;!&ndash;<exclude>${build.exclude}</exclude>&ndash;&gt;-->
+                <!--&lt;!&ndash;</excludes>&ndash;&gt;-->
+            <!--</resource>-->
+            <!--<resource>-->
+                <!--<directory>src/main/docker</directory>-->
+            <!--</resource>-->
+        <!--</resources>-->
         <plugins>
             <!--docker -->
             <plugin>
@@ -34,14 +62,14 @@
                 <executions>
                     <execution>
                         <id>build-image</id>
-                        <phase>package</phase>
+                        <phase>install</phase>
                         <goals>
                             <goal>build</goal>
                         </goals>
                     </execution>
                     <execution>
                         <id>push-image</id>
-                        <phase>package</phase>
+                        <phase>install</phase>
                         <goals>
                             <goal>push</goal>
                         </goals>

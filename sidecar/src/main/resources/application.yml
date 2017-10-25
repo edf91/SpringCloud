@@ -1,16 +1,14 @@
 spring:
   application:
-    name: zuul
+    name: sidecar
   profiles:
-    active: zuul1
+    active: sidecar1
 eureka:
   client:
     serviceUrl:
       defaultZone: http://eserver1:30000/eureka/,http://eserver2:30001/eureka/
   instance:
     prefer-ip-address: true
-    metadata-map:
-      customer: 自定义元数据
 info:
   app:
     name: @project.artifactId@
@@ -18,20 +16,19 @@ info:
     java:
       source: @java.version@
       target: @java.version@
-logging:
-  level:
-    root: INFO
-    org.springframework.web.servlet.DispatcherServlet: DEBUG
+sidecar:
+  port: 30016
+  health-uri: http://localhost:30016/health
 management:
   security:
     enabled: false
 ---
 spring:
-  profiles: zuul1
+  profiles: sidecar1
 server:
-  port: 30012
+  port: 30014
 ---
 spring:
-  profiles: zuul2
+  profiles: sidecar2
 server:
-  port: 30013
+  port: 30015

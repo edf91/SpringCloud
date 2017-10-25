@@ -37,6 +37,8 @@
             <artifactId>spring-cloud-sleuth-zipkin</artifactId>
         </dependency>
 
+
+
     </dependencies>
     <build>
         <plugins>
@@ -48,14 +50,14 @@
                 <executions>
                     <execution>
                         <id>build-image</id>
-                        <phase>package</phase>
+                        <phase>install</phase>
                         <goals>
                             <goal>build</goal>
                         </goals>
                     </execution>
                     <execution>
                         <id>push-image</id>
-                        <phase>package</phase>
+                        <phase>install</phase>
                         <goals>
                             <goal>push</goal>
                         </goals>

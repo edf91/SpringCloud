@@ -34,6 +34,17 @@ public class UserCtl {
     }
 
     /**
+     * 调用dubbo服务
+     * @param id
+     * @return
+     */
+    @HystrixCommand(fallbackMethod = "ofIdFallback")
+    @GetMapping(value = "/c/dubbo/{id}")
+    public User ofIdDubbo(@PathVariable("id") String id){
+        return restTemplate.getForObject("http://sidecar/dubbo/" + id,User.class);
+    }
+
+    /**
      * 熔断返回的数据
      * @param id
      * @return
