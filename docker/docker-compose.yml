@@ -7,8 +7,6 @@ services:
       - "30000:30000"
     environment:
       - spring.profiles.active=eserver1
-    depends_on:
-      - zipkin
   eserver2:
     image: localhost:50000/wangxd/eureka-server:1.0-SNAPSHOT
     hostname: eserver2
@@ -16,44 +14,67 @@ services:
       - spring.profiles.active=eserver2
     ports:
       - "30001:30001"
-    depends_on:
-      - eserver1
   service:
     image: localhost:50000/wangxd/u-service:1.0-SNAPSHOT
     hostname: service
+    environment:
+      - spring.profiles.active=uservice1
     ports:
       - "30002:30002"
       - "30003:30003"
-    depends_on:
-      - eserver1
-      - eserver2
   consumer:
     image: localhost:50000/wangxd/u-consumer:1.0-SNAPSHOT
     hostname: consumer
+    environment:
+      - spring.profiles.active=uconsumer1
     ports:
       - "30004:30004"
       - "30005:30005"
-    depends_on:
-      - service
   zipkin:
     image: localhost:50000/wangxd/zipkin:1.0-SNAPSHOT
     hostname: zipkin
+    environment:
+      - spring.profiles.active=zipkin1
     ports:
       - "30006:30006"
       - "30007:30007"
-#  dashboard:
-#    image: localhost:50000/wangxd/hystrix-dashboard:1.0-SNAPSHOT
-#    hostname: dashboard
-#    ports:
-#      - "30008:30008"
-#      - "30009:30009"
-#    depends_on:
-#      - consumer
-#  turbine:
-#    image: localhost:50000/wangxd/hystrix-turbine:1.0-SNAPSHOT
-#    hostname: turbine
-#    ports:
-#      - "30010:30010"
-#      - "30011:30011"
-#    depends_on:
-#      - consumer
+  dashboard:
+    image: localhost:50000/wangxd/hystrix-dashboard:1.0-SNAPSHOT
+    hostname: dashboard
+    environment:
+      - spring.profiles.active=dashboard1
+    ports:
+      - "30008:30008"
+      - "30009:30009"
+  turbine:
+    image: localhost:50000/wangxd/hystrix-turbine:1.0-SNAPSHOT
+    hostname: turbine
+    environment:
+      - spring.profiles.active=turbine1
+    ports:
+      - "30010:30010"
+      - "30011:30011"
+  zuul:
+    image: localhost:50000/wangxd/zuul:1.0-SNAPSHOT
+    hostname: zuul
+    environment:
+      - spring.profiles.active=zuul1
+    ports:
+      - "30012:30012"
+      - "30013:30013"
+  sidecar:
+    image: localhost:50000/wangxd/sidecar:1.0-SNAPSHOT
+    hostname: sidecar
+    environment:
+      - spring.profiles.active=sidecar1
+    ports:
+      - "30014:30014"
+      - "30015:30015"
+  dservice:
+    image: localhost:50000/wangxd/dubbo-service:1.0-SNAPSHOT
+    hostname: dubbo
+    environment:
+      - spring.profiles.active=dubbo-provider1
+    ports:
+      - "30016:30016"
+      - "30017:30017"

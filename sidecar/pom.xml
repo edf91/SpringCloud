@@ -32,6 +32,28 @@
 
     <build>
         <plugins>
+            <!--resource-->
+            <plugin>
+                <artifactId>maven-resources-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>copy-resources</id>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}/docker</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>src/main/docker</directory>
+                                    <filtering>true</filtering>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
             <!--docker -->
             <plugin>
                 <groupId>com.spotify</groupId>
@@ -53,11 +75,10 @@
                         </goals>
                     </execution>
                 </executions>
-
                 <!--基于 Dockerfile-->
                 <configuration>
                     <imageName>${docker.registry}${project.artifactId}:${project.version}</imageName>
-                    <dockerDirectory>${project.basedir}/src/main/docker</dockerDirectory>
+                    <dockerDirectory>${project.build.directory}/docker</dockerDirectory>
                     <resources>
                         <resource>
                             <targetPath>/</targetPath>

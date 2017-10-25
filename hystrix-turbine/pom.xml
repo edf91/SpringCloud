@@ -20,6 +20,28 @@
 
     <build>
         <plugins>
+            <!--resource-->
+            <plugin>
+                <artifactId>maven-resources-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>copy-resources</id>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}/docker</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>src/main/docker</directory>
+                                    <filtering>true</filtering>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
             <!--docker -->
             <plugin>
                 <groupId>com.spotify</groupId>
@@ -44,7 +66,7 @@
                 <!--基于 Dockerfile-->
                 <configuration>
                     <imageName>${docker.registry}${project.artifactId}:${project.version}</imageName>
-                    <dockerDirectory>${project.basedir}/src/main/docker</dockerDirectory>
+                    <dockerDirectory>${project.build.directory}/docker</dockerDirectory>
                     <resources>
                         <resource>
                             <targetPath>/</targetPath>
@@ -58,20 +80,6 @@
                     <!--强制覆盖tag-->
                     <forceTags>true</forceTags>
                 </configuration>
-
-                <!--执行docker 命令构建镜像-->
-                <!--<configuration>-->
-                <!--<imageName>wangxd/eureka-server:1.0</imageName>-->
-                <!--<baseImage>wangxd/java:8</baseImage>-->
-                <!--<entryPoint>["java","-jar","/${project.build.finalName}.jar"]</entryPoint>-->
-                <!--<resources>-->
-                <!--<resource>-->
-                <!--<targetPath>/</targetPath>-->
-                <!--<directory>${project.build.directory}</directory>-->
-                <!--<include>${project.build.finalName}.jar</include>-->
-                <!--</resource>-->
-                <!--</resources>-->
-                <!--</configuration>-->
             </plugin>
         </plugins>
     </build>

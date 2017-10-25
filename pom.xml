@@ -17,8 +17,6 @@
         <module>hystrix-dashboard</module>
         <module>zuul</module>
         <module>sidecar</module>
-        <module>dubbo-service</module>
-        <module>dubbo-api</module>
     </modules>
 
 
