@@ -112,4 +112,5 @@
  - 基于Bus[依赖mq]实现自动刷新，轻量级消息代理
 
 
-
+## 源码地址
+[https://github.com/wangxiaodong91/SpringCloud](https://github.com/wangxiaodong91/SpringCloud)
