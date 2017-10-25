@@ -6,7 +6,7 @@ spring:
       address: zookeeper://127.0.0.1:2181
     protocol: 
       name: dubbo
-      port: 20880
+      port: 20881
     scan: org.wxd.springcloud.dubbo
   application:
     name: dubbo-provider

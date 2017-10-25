@@ -9,16 +9,20 @@ import com.alibaba.dubbo.config.RegistryConfig;
 @ConfigurationProperties(prefix = "spring.dubbo")
 public class DubboProperties {
 
-    private String            scan;
+    private String scan;
 
     private ApplicationConfig application;
 
-    private RegistryConfig    registry;
+    private RegistryConfig registry;
 
-    private ProtocolConfig    protocol;
+    private ProtocolConfig protocol;
 
     public String getScan() {
         return scan;
+    }
+
+    public void setScan(String scan) {
+        this.scan = scan;
     }
 
     public ApplicationConfig getApplication() {
@@ -44,9 +48,4 @@ public class DubboProperties {
     public void setProtocol(ProtocolConfig protocol) {
         this.protocol = protocol;
     }
-
-    public void setScan(String scan) {
-        this.scan = scan;
-    }
-
 }
