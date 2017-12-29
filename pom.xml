@@ -17,6 +17,7 @@
         <module>hystrix-dashboard</module>
         <module>zuul</module>
         <module>sidecar</module>
+        <module>junit-demo</module>
     </modules>
 
 

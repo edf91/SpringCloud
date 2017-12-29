@@ -1,0 +1,5 @@
+spring:
+  application:
+    name: juniDemo
+server:
+  port: 40000
