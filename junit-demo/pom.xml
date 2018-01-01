@@ -47,6 +47,7 @@
                             <excludes>
                                 <exclude>org/wxd/junit/demo/facade/*.class</exclude>
                                 <exclude>org/wxd/junit/demo/*.class</exclude>
+                                <exclude>org/wxd/junit/demo/api/*.class</exclude>
                             </excludes>
                         </instrumentation>
                     </configuration>
