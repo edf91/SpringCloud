@@ -10,7 +10,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
@@ -30,32 +29,32 @@ public class SimpleControllerDemoTest {
     public void setUp() throws Exception {
         mvc = MockMvcBuilders.webAppContextSetup(context).build();
 
-        mvc.perform(MockMvcRequestBuilders.post("/simple/add").param("id",id))
+        mvc.perform(MockMvcRequestBuilders.post("/simple/add").param("id", id))
                 .andExpect(MockMvcResultMatchers.status().isOk());
     }
 
     @Test
     public void assertOfId() throws Exception {
-        String qId = mvc.perform(MockMvcRequestBuilders.get(String.format("/simple/%s",id)))
+        String qId = mvc.perform(MockMvcRequestBuilders.get(String.format("/simple/%s", id)))
                 .andExpect(MockMvcResultMatchers.status().isOk())
-        .andReturn().getResponse().getContentAsString();
-        Assert.assertEquals(id,qId);
+                .andReturn().getResponse().getContentAsString();
+        Assert.assertEquals(id, qId);
     }
 
     @Test
     public void assertDel() throws Exception {
         remove();
-        String qId = mvc.perform(MockMvcRequestBuilders.get(String.format("/simple/%s",id)))
+        String qId = mvc.perform(MockMvcRequestBuilders.get(String.format("/simple/%s", id)))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andReturn().getResponse().getContentAsString();
 
-        Assert.assertEquals("",qId);
+        Assert.assertEquals("", qId);
     }
 
 
     private void remove() throws Exception {
         mvc.perform(
-                MockMvcRequestBuilders.delete(String.format("/simple/%s/remove",id))
+                MockMvcRequestBuilders.delete(String.format("/simple/%s/remove", id))
         ).andExpect(MockMvcResultMatchers.status().isOk());
     }
 

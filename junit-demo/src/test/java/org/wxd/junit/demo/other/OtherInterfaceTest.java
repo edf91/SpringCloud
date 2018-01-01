@@ -29,7 +29,7 @@ public class OtherInterfaceTest {
     private String id = "id";
 
     @Before
-    public void setUp(){
+    public void setUp() {
         /**
          * 如果otherInterface 本地开发未完成，或者网络不通等，则可以通过mock打桩
          */
@@ -38,19 +38,19 @@ public class OtherInterfaceTest {
 
     // 测试otherInterface
     @Test
-    public void assertOfId(){
+    public void assertOfId() {
         String qId = otherInterface.getOf(id);
-        Assert.assertEquals(qId,id);
+        Assert.assertEquals(qId, id);
         // 校验 getOf(id) 是否被调用1次
-        verify(otherInterface,times(1)).getOf(id);
+        verify(otherInterface, times(1)).getOf(id);
     }
 
     // 测试通过service 调用 otherService
     @Test
-    public void assertCallOfId(){
+    public void assertCallOfId() {
         String qId = service.of(id);
-        Assert.assertEquals(qId,id);
-        verify(otherInterface,times(1)).getOf(id);
+        Assert.assertEquals(qId, id);
+        verify(otherInterface, times(1)).getOf(id);
     }
 
 }

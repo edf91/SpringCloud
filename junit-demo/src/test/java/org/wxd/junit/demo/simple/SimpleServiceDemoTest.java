@@ -25,20 +25,20 @@ public class SimpleServiceDemoTest {
     private static String id = "id";
 
     @Before
-    public void setUp(){
+    public void setUp() {
         service.save(id);
     }
 
 
     @Test
-    public void assertOfId(){
+    public void assertOfId() {
         String qId = service.of(id);
-        Assert.assertEquals(id,qId);
-        Is.is(Objects.equals(id,qId));
+        Assert.assertEquals(id, qId);
+        Is.is(Objects.equals(id, qId));
     }
 
     @Test
-    public void assertDelOfId(){
+    public void assertDelOfId() {
         service.delOf(id);
         String qId = service.of(id);
 
@@ -47,7 +47,7 @@ public class SimpleServiceDemoTest {
     }
 
     @After
-    public void clearUp(){
+    public void clearUp() {
         service.delOf(id);
     }
 
