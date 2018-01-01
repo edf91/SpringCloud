@@ -1,7 +1,6 @@
 package org.wxd.junit.demo.other;
 
 
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
@@ -14,6 +13,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.wxd.junit.demo.api.OtherInterface;
 import org.wxd.junit.demo.service.CallOtherInterfaceService;
 
+import static org.hamcrest.core.Is.is;
+import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.*;
 
 @SpringBootTest
@@ -40,7 +41,8 @@ public class OtherInterfaceTest {
     @Test
     public void assertOfId() {
         String qId = otherInterface.getOf(id);
-        Assert.assertEquals(qId, id);
+
+        assertThat(qId, is(id));
         // 校验 getOf(id) 是否被调用1次
         verify(otherInterface, times(1)).getOf(id);
     }
@@ -49,8 +51,9 @@ public class OtherInterfaceTest {
     @Test
     public void assertCallOfId() {
         String qId = service.of(id);
-        Assert.assertEquals(qId, id);
+
         verify(otherInterface, times(1)).getOf(id);
+        assertThat(qId, is(id));
     }
 
 }

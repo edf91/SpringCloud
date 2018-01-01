@@ -20,11 +20,34 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
 
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
 
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>18.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.dbunit</groupId>
+            <artifactId>dbunit</artifactId>
+            <version>2.5.3</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
@@ -47,6 +70,8 @@
                             <excludes>
                                 <exclude>org/wxd/junit/demo/facade/*.class</exclude>
                                 <exclude>org/wxd/junit/demo/*.class</exclude>
+                                <exclude>org/wxd/junit/demo/domain/*.class</exclude>
+                                <exclude>org/wxd/junit/demo/dao/*.class</exclude>
                                 <exclude>org/wxd/junit/demo/api/*.class</exclude>
                             </excludes>
                         </instrumentation>

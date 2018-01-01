@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.wxd.junit.demo.facade.SimpleFacade;
 
+import java.util.ArrayList;
+
 @Service
 public class SimpleService {
 
@@ -24,6 +26,7 @@ public class SimpleService {
     }
 
 
-
-
+    public void error() throws IndexOutOfBoundsException{
+        new ArrayList<>().get(10);
+    }
 }

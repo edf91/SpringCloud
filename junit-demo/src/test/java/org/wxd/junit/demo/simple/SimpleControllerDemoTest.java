@@ -1,7 +1,10 @@
 package org.wxd.junit.demo.simple;
 
 
-import org.junit.*;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.FixMethodOrder;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +16,9 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
+
+import static org.hamcrest.core.Is.is;
+import static org.junit.Assert.assertThat;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest
@@ -38,7 +44,8 @@ public class SimpleControllerDemoTest {
         String qId = mvc.perform(MockMvcRequestBuilders.get(String.format("/simple/%s", id)))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andReturn().getResponse().getContentAsString();
-        Assert.assertEquals(id, qId);
+
+        assertThat(qId, is(id));
     }
 
     @Test
@@ -48,7 +55,7 @@ public class SimpleControllerDemoTest {
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andReturn().getResponse().getContentAsString();
 
-        Assert.assertEquals("", qId);
+        assertThat(qId, is(""));
     }
 
 

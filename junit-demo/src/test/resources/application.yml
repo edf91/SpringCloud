@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: juniDemo
+  datasource:
+    platform: h2
+    schema: classpath:schema.sql
+    data: classpath:data.sql
+# 自动生成ddl，由于指定了具体的ddl，此处设置为none
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+    generate-ddl: false
+server:
+  port: 40000
