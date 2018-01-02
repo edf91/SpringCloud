@@ -13,6 +13,9 @@ import org.wxd.junit.demo.domain.Person;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
 
+/**
+ * 基于spring boot 和 h2 的db测试
+ */
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest
 @FixMethodOrder(value = MethodSorters.JVM)
