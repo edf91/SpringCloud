@@ -63,28 +63,97 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
-
     <build>
-        <pluginManagement>
-            <plugins>
-                <!--生成报告插件-->
-                <plugin>
-                    <groupId>org.codehaus.mojo</groupId>
-                    <artifactId>cobertura-maven-plugin</artifactId>
-                    <version>2.7</version>
-                    <configuration>
-                        <instrumentation>
-                            <excludes>
-                                <exclude>org/wxd/junit/demo/facade/*.class</exclude>
-                                <exclude>org/wxd/junit/demo/*.class</exclude>
-                                <exclude>org/wxd/junit/demo/domain/*.class</exclude>
-                                <exclude>org/wxd/junit/demo/dao/*.class</exclude>
-                                <exclude>org/wxd/junit/demo/api/*.class</exclude>
-                            </excludes>
-                        </instrumentation>
-                    </configuration>
-                </plugin>
-            </plugins>
-        </pluginManagement>
+        <plugins>
+            <!-- 设置编译版本 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.6.1</version>
+                <configuration>
+                    <skipMain>false</skipMain>
+                    <skip>false</skip>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+            <!--配置test命令运行类的-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.19</version>
+                <configuration>
+                    <includes>
+                        <include>**/AllTest.java</include>
+                    </includes>
+                </configuration>
+            </plugin>
+            <!--生成报告插件不支持jdk8语法-->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>cobertura-maven-plugin</artifactId>
+                <version>2.7</version>
+                <configuration>
+                    <instrumentation>
+                        <excludes>
+                            <exclude>org/wxd/junit/demo/facade/*.class</exclude>
+                            <exclude>org/wxd/junit/demo/*.class</exclude>
+                            <exclude>org/wxd/junit/demo/domain/*.class</exclude>
+                            <exclude>org/wxd/junit/demo/dao/*.class</exclude>
+                            <exclude>org/wxd/junit/demo/api/*.class</exclude>
+                        </excludes>
+                    </instrumentation>
+                </configuration>
+            </plugin>
+            <!--支持jdk8语法的测试报告生成-->
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>0.8.0</version>
+                <executions>
+                    <execution>
+                        <id>prepare-agent</id>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>report</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>post-unit-test</id>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                        <configuration>
+                            <!-- Sets the path to the file which contains the execution data. -->
+
+                            <dataFile>target/jacoco.exec</dataFile>
+                            <!-- Sets the output directory for the code coverage report. -->
+                            <outputDirectory>target/jacoco-ut</outputDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+                <configuration>
+                    <excludes>
+                        <exclude>org/wxd/junit/demo/facade/*.class</exclude>
+                        <exclude>org/wxd/junit/demo/*.class</exclude>
+                        <exclude>org/wxd/junit/demo/domain/*.class</exclude>
+                        <exclude>org/wxd/junit/demo/dao/*.class</exclude>
+                        <exclude>org/wxd/junit/demo/api/*.class</exclude>
+                    </excludes>
+                    <systemPropertyVariables>
+                        <jacoco-agent.destfile>target/jacoco.exec</jacoco-agent.destfile>
+                    </systemPropertyVariables>
+                </configuration>
+            </plugin>
+        </plugins>
+
     </build>
+
 </project>
