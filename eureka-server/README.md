@@ -176,7 +176,7 @@ public EurekaAutoServiceRegistration eurekaAutoServiceRegistration(ApplicationCo
     ![image](http://note.youdao.com/yws/public/resource/474a64dcff40ff49b32f44effeab6b7d/xmlnote/WEBRESOURCE3938b47715f8e50cabbb1daf5e706cbc/537)
     
     **DiscoveryClient**主要负责与eureka server交互，需要配置servers的url，支持故障转移。eureka client 的主要作用有：
-       - 注册实力到eureka server
+       - 注册实例到eureka server
        - 向eureka server 续租约
        - 在cleint关闭时，取消同eureka server的租约
        - 查询eureka server中的注册信息
